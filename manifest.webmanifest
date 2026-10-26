@@ -1,0 +1,12 @@
+{
+  "name": "Palácio do Corte",
+  "short_name": "Palácio",
+  "description": "Agende seu horário no Palácio do Corte.",
+  "start_url": "./index.html#agendar",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#070B16",
+  "theme_color": "#070B16",
+  "icons": [{ "src": "assets/icone.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }],
+  "shortcuts": [{ "name": "Área da equipe", "url": "./painel.html" }]
+}
