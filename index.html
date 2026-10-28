@@ -3,126 +3,268 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Palácio do Corte · Barbearia em Salvador · Agende online</title>
-<meta name="description" content="Palácio do Corte: cabelo e barba em duas unidades em Salvador, Cidade Baixa e Cardeal da Silva. Escolha a unidade, o barbeiro e o horário e confirme na hora.">
-<meta name="theme-color" content="#070B16">
+<title>Palácio do Corte · Barbearia em Salvador · Cidade Baixa e Federação</title>
+<meta name="description" content="Palácio do Corte: cabelo, barba e realeza em Salvador. Duas casas, Cidade Baixa e Federação. Corte a partir de R$ 30. Agende online.">
+<meta name="theme-color" content="#0A1430">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="assets/icone.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="assets/icone.svg">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Palácio">
+<link rel="icon" href="assets/icone-192.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/icone-192.png">
+<meta property="og:title" content="Palácio do Corte · O que deseja para hoje?">
+<meta property="og:image" content="fotos/site/013.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 
-<div class="faixa-demo"><b>Protótipo de demonstração.</b> Nomes, serviços e preços são de exemplo. Os horários ficam salvos só neste aparelho.</div>
+<!-- abertura -->
+<div class="abertura" id="abertura" aria-hidden="true">
+  <img src="fotos/brasao.png" alt="" class="abertura-brasao">
+  <p class="abertura-frase"><span id="digita"></span><i class="cursor"></i></p>
+</div>
 
-<header class="topo">
-  <div class="wrap topo-in">
-    <a class="marca" href="#" aria-label="Palácio do Corte, início">
-      <svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><use href="#coroa"/></svg>
-      <span><b>PALÁCIO</b><small>do corte</small></span>
-    </a>
-    <nav class="menu" aria-label="Seções">
-      <a href="#unidades">Unidades</a><a href="#servicos">Serviços</a><a href="#planos">Planos</a><a href="painel.html">Área da equipe</a>
-    </nav>
-    <a class="btn btn-ouro" href="#agendar">Agendar</a>
-  </div>
+<header class="nav" id="nav">
+  <a href="#topo" class="nav-marca" aria-label="Palácio do Corte, início">
+    <img src="fotos/escudo.png" alt="" width="46" height="29">
+    <span>Palácio do Corte</span>
+  </a>
+  <nav class="nav-links" aria-label="Seções">
+    <a href="#historia">História</a>
+    <a href="#ritual">O ritual</a>
+    <a href="#regua">Na régua</a>
+    <a href="#casas">Unidades</a>
+  </nav>
+  <a href="#agendar" class="nav-cta">Agendar</a>
 </header>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <linearGradient id="g-ouro" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4DE9C"/><stop offset=".5" stop-color="#D9B45A"/><stop offset="1" stop-color="#8E6B21"/></linearGradient>
-    <symbol id="coroa" viewBox="0 0 64 64">
-      <rect x="1" y="1" width="62" height="62" rx="14" fill="#111B33" stroke="#8E6B21"/>
-      <path d="M14 42 L11 22 L22 31 L32 16 L42 31 L53 22 L50 42 Z" fill="url(#g-ouro)"/>
-      <rect x="14" y="45" width="36" height="5" rx="2" fill="url(#g-ouro)"/>
-      <circle cx="11" cy="21" r="2.6" fill="#F4DE9C"/><circle cx="32" cy="15" r="2.6" fill="#F4DE9C"/><circle cx="53" cy="21" r="2.6" fill="#F4DE9C"/>
-    </symbol>
-  </defs>
-</svg>
+<main id="topo">
 
-<section class="capa">
-  <div class="wrap capa-in">
-    <div>
-      <span class="selo">👑 Agora com duas unidades em Salvador</span>
-      <h1>Seu corte, tratado como <span class="dourado">realeza</span>.</h1>
-      <p class="lead">Escolha a unidade, o barbeiro e o horário em menos de um minuto. Sem baixar nada e sem fila no WhatsApp.</p>
-      <div class="ctas">
-        <a class="btn btn-ouro" href="#agendar">Agendar meu horário</a>
-        <a class="btn btn-linha" href="#unidades">Ver as unidades</a>
+  <!-- 1 · CAPA -->
+  <section class="capa" id="capa">
+    <div class="capa-palco">
+      <figure class="capa-foto"><img src="fotos/site/013.webp" alt="Barbeiro do Palácio do Corte passando toalha quente com vapor no cliente"></figure>
+      <div class="capa-veu"></div>
+      <h1 class="capa-titulo">
+        <span class="linha l1"><span>Palácio</span></span>
+        <span class="linha l2"><em>do</em> <span>Corte</span></span>
+      </h1>
+      <div class="capa-rodape">
+        <p>Cabelo, barba e realeza em Salvador.<br>Duas casas: <b>Cidade Baixa</b> e <b>Federação</b>.</p>
+        <a href="#agendar" class="btn btn-creme">Agendar horário <span aria-hidden="true">→</span></a>
       </div>
-      <div class="numeros">
-        <span><b>2</b>unidades</span>
-        <span><b id="n-barbeiros">8</b>barbeiros</span>
-        <span><b>1 min</b>para agendar</span>
+      <span class="rolar" aria-hidden="true">role</span>
+    </div>
+  </section>
+
+  <!-- 2 · FAIXA -->
+  <div class="faixa" aria-hidden="true">
+    <div class="faixa-trilho" id="faixa">
+      <span>O que deseja para hoje?</span><img src="fotos/escudo.png" alt=""><span>Degradê na régua</span><img src="fotos/escudo.png" alt=""><span>Toalha quente com vapor</span><img src="fotos/escudo.png" alt=""><span>Barboterapia</span><img src="fotos/escudo.png" alt=""><span>Pequenos príncipes</span><img src="fotos/escudo.png" alt="">
+      <span>O que deseja para hoje?</span><img src="fotos/escudo.png" alt=""><span>Degradê na régua</span><img src="fotos/escudo.png" alt=""><span>Toalha quente com vapor</span><img src="fotos/escudo.png" alt=""><span>Barboterapia</span><img src="fotos/escudo.png" alt=""><span>Pequenos príncipes</span><img src="fotos/escudo.png" alt="">
+    </div>
+  </div>
+
+  <!-- 3 · MANIFESTO -->
+  <section class="manifesto" id="manifesto">
+    <div class="manifesto-palco">
+      <div class="m-col">
+        <p class="rotulo">Manifesto</p>
+        <p class="manifesto-texto" id="manifesto-texto">Aqui a realeza não tem <b data-foto="m-idade">idade</b>, <b data-foto="m-genero">gênero</b> ou <b data-foto="m-padrao">padrão</b>. O nosso reino é para todos.</p>
+        <p class="manifesto-fonte">Palavras do próprio Palácio, no dia em que abriu a casa da Federação.</p>
+      </div>
+      <div class="m-fotos">
+        <img class="m-foto" id="m-idade" src="fotos/site/019.webp" alt="Cliente senhora de cabelo branco sorrindo na cadeira">
+        <img class="m-foto" id="m-genero" src="fotos/site/020.webp" alt="Barbeira cortando o cabelo de uma cliente">
+        <img class="m-foto" id="m-padrao" src="fotos/site/007.webp" alt="Menino sorrindo com joinha depois do corte">
       </div>
     </div>
-    <div class="coroa-grande"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M14 42 L11 22 L22 31 L32 16 L42 31 L53 22 L50 42 Z" fill="url(#g-ouro)"/><rect x="14" y="45" width="36" height="5" rx="2" fill="url(#g-ouro)"/><circle cx="11" cy="21" r="2.6" fill="#F4DE9C"/><circle cx="32" cy="15" r="2.6" fill="#F4DE9C"/><circle cx="53" cy="21" r="2.6" fill="#F4DE9C"/></svg></div>
-  </div>
-</section>
+  </section>
 
-<section class="secao" id="unidades" style="padding-top:0">
-  <div class="wrap">
-    <p class="olho">Unidades</p>
-    <h2>Duas casas, o mesmo padrão</h2>
-    <p class="sub">Escolha a mais perto de você. A agenda de cada unidade é separada, com os barbeiros de cada casa.</p>
-    <div class="unidades" id="lista-unidades"></div>
-  </div>
-</section>
+  <!-- 4 · R$30 -->
+  <section class="trinta" id="trinta">
+    <div class="trinta-palco">
+      <p class="rotulo rotulo-claro">Corte de cabelo</p>
+      <div class="trinta-num" aria-label="R$ 30">
+        <span class="rs">R$</span><span class="num">30</span>
+      </div>
+      <div class="trinta-lado">
+        <figure><img src="fotos/site/018.webp" alt="Barbeiro segurando placa: Corte R$ 30,00, agende seu horário"></figure>
+        <p>“Quem disse que para ficar na régua precisa gastar muito?” Degradê na régua, acabamento impecável e atendimento digno da realeza, nas duas casas.</p>
+        <a href="#agendar" class="btn btn-royal">Quero meu corte</a>
+      </div>
+    </div>
+  </section>
 
-<section class="secao" id="servicos" style="padding-top:0">
-  <div class="wrap">
-    <p class="olho">Serviços</p>
-    <h2>O que deseja para hoje?</h2>
-    <div class="grade-serv" id="lista-servicos"></div>
-    <p class="nota">Valores de exemplo neste protótipo.</p>
-  </div>
-</section>
+  <!-- 5 · HISTÓRIA (horizontal) -->
+  <section class="historia" id="historia">
+    <div class="historia-trilho" id="trilho">
+      <div class="historia-cab">
+        <p class="rotulo">A história</p>
+        <h2>Do bairro<br>ao <em>reinado</em></h2>
+        <p>Seis capítulos contados pelo próprio Palácio, post a post. Role para atravessar.</p>
+      </div>
+      <article class="cap">
+        <span class="cap-n">I</span>
+        <figure><img src="fotos/site/039.webp" alt="Salão da Cidade Baixa com parede azul e cadeiras"></figure>
+        <h3>A casa da Cidade Baixa</h3>
+        <p>Rua Duarte da Costa, 185. É onde o Palácio criou o seu padrão: parede azul royal, uniforme de suspensório e a pergunta que virou marca: <i>o que deseja para hoje?</i></p>
+      </article>
+      <article class="cap">
+        <span class="cap-n">II</span>
+        <figure><img src="fotos/site/074.webp" alt="Equipe do Palácio do Corte brincando com óculos coloridos em frente ao letreiro"></figure>
+        <h3>Uma equipe que vira família</h3>
+        <p>“Carnaval é isso: equipe unida, alegria no rosto e estilo em dia.” O clima da casa aparece em cada post, e é ele que faz o cliente voltar toda semana.</p>
+      </article>
+      <article class="cap cap-obra">
+        <span class="cap-n">III</span>
+        <div class="obra">
+          <figure><img src="fotos/site/046.webp" alt="Episódio 1 da obra da Unidade Federação"></figure>
+          <figure><img src="fotos/site/045.webp" alt="Episódio 2 da obra da Unidade Federação"></figure>
+          <figure><img src="fotos/site/044.webp" alt="Episódio 3 da obra da Unidade Federação"></figure>
+        </div>
+        <h3>Ep. 1, 2 e 3: a obra</h3>
+        <p>“O padrão chegou na Federação… e isso é só o começo.” A nova casa foi construída episódio por episódio, com os clientes acompanhando cada etapa.</p>
+      </article>
+      <article class="cap">
+        <span class="cap-n">IV</span>
+        <figure><img src="fotos/site/099.webp" alt="Cadeiras azuis da Unidade Federação"></figure>
+        <h3>Sejam bem-vindos ao nosso reinado</h3>
+        <p>Nasce o Palácio do Corte · Unidade Federação, na Av. Cardeal da Silva. “Um lugar onde cada detalhe foi pensado para você viver uma experiência digna da realeza.”</p>
+      </article>
+      <article class="cap">
+        <span class="cap-n">V</span>
+        <figure><img src="fotos/site/015.webp" alt="Gravação da TV Band no Palácio do Corte"></figure>
+        <h3>Um dia de gravação com a Band</h3>
+        <p>A TV veio conhecer a experiência por dentro. A marca também já recebeu grandes nomes na cadeira.</p>
+      </article>
+      <article class="cap cap-fim">
+        <span class="cap-n">VI</span>
+        <h3>O Palácio está crescendo</h3>
+        <p>Duas casas, equipe em treinamento constante e vagas abertas para novos barbeiros. O próximo capítulo começa com o seu agendamento.</p>
+        <a href="#agendar" class="btn btn-royal">Fazer parte da história</a>
+      </article>
+    </div>
+  </section>
 
-<section class="secao" id="planos" style="padding-top:0">
-  <div class="wrap">
-    <p class="olho">Planos</p>
-    <h2>Assine e corte o mês inteiro</h2>
-    <p class="sub">Pague uma vez por mês e use nas duas unidades. Assinante marca horário sem pagar nada na hora.</p>
-    <div class="planos" id="lista-planos"></div>
-    <p class="nota">Planos e preços de exemplo. A assinatura pode ser feita aqui ou na recepção.</p>
-  </div>
-</section>
+  <!-- 6 · RITUAL -->
+  <section class="ritual" id="ritual">
+    <div class="ritual-fotos" aria-hidden="true">
+      <img src="fotos/site/056.webp" alt="" class="rf ativa" data-i="0">
+      <img src="fotos/site/058.webp" alt="" class="rf" data-i="1">
+      <img src="fotos/site/057.webp" alt="" class="rf" data-i="2">
+      <img src="fotos/site/052.webp" alt="" class="rf" data-i="3">
+    </div>
+    <div class="ritual-textos">
+      <p class="rotulo rotulo-claro">O ritual</p>
+      <h2>Mais que um corte,<br><em>uma experiência real.</em></h2>
+      <div class="passo" data-i="0"><span>01</span><h3>Toalha quente com vapor</h3><p>“Aquele momento de relaxamento que transforma o atendimento em uma verdadeira experiência.”</p></div>
+      <div class="passo" data-i="1"><span>02</span><h3>Navalha e precisão</h3><p>“Um corte bem executado não muda só o visual, muda a presença.” Contorno feito à mão, detalhe por detalhe.</p></div>
+      <div class="passo" data-i="2"><span>03</span><h3>Barboterapia</h3><p>“Para renovar o visual, relaxar a mente.” Cuidar da barba também é cuidar da pele: sem irritação e sem pontinhos vermelhos.</p></div>
+      <div class="passo" data-i="3"><span>04</span><h3>Acabamento na régua</h3><p>Degradê alinhado, risco limpo e o espelho no final. “Cliente senta na cadeira, sai renovado.”</p></div>
+    </div>
+  </section>
 
-<section class="secao agendar" id="agendar">
-  <div class="wrap">
-    <p class="olho">Agendamento</p>
-    <h2>Marque seu horário</h2>
+  <!-- 7 · NA RÉGUA -->
+  <section class="regua" id="regua">
+    <h2 class="regua-titulo" aria-label="Na régua"><span>NA</span><span>RÉGUA</span></h2>
+    <div class="colunas">
+      <div class="coluna" data-vel="-12"><img src="fotos/site/004.webp" alt="Corte cacheado com barba"><img src="fotos/site/031.webp" alt="Degradê em criança"><img src="fotos/site/089.webp" alt="Corte com textura"><img src="fotos/site/096.webp" alt="Degradê com óculos"><img src="fotos/site/022.webp" alt="Barbeiro sorrindo com cliente"></div>
+      <div class="coluna" data-vel="10"><img src="fotos/site/042.webp" alt="Degradê baixo"><img src="fotos/site/037.webp" alt="Corte com barba desenhada"><img src="fotos/site/094.webp" alt="Corte afro com degradê"><img src="fotos/site/035.webp" alt="Barba cheia alinhada"><img src="fotos/site/065.webp" alt="Corte crespo com degradê"></div>
+      <div class="coluna" data-vel="-6"><img src="fotos/site/050.webp" alt="Degradê com sorriso"><img src="fotos/site/092.webp" alt="Barba desenhada"><img src="fotos/site/032.webp" alt="Corte social com óculos"><img src="fotos/site/097.webp" alt="Degradê clássico"><img src="fotos/site/025.webp" alt="Corte e barba"></div>
+      <div class="coluna so-largo" data-vel="14"><img src="fotos/site/008.webp" alt="Degradê e barba"><img src="fotos/site/095.webp" alt="Degradê lateral"><img src="fotos/site/003.webp" alt="Cachos com barba"><img src="fotos/site/029.webp" alt="Cliente de óculos"><img src="fotos/site/023.webp" alt="" onerror="this.remove()"></div>
+    </div>
+  </section>
+
+  <!-- 8 · PEQUENOS PRÍNCIPES -->
+  <section class="principes" id="principes">
+    <p class="rotulo">Pequenos príncipes</p>
+    <h2 class="principes-titulo"><span>Pequenos na idade,</span> <em>gigantes no estilo.</em></h2>
+    <div class="principes-fila">
+      <figure><img src="fotos/site/017.webp" alt="Menino sorrindo depois do corte"></figure>
+      <figure><img src="fotos/site/005.webp" alt="Pai e filho no Palácio do Corte"></figure>
+      <figure><img src="fotos/site/061.webp" alt="Criança com corte novo"></figure>
+      <figure><img src="fotos/site/034.webp" alt="Criança fazendo joinha na cadeira"></figure>
+    </div>
+    <p class="principes-texto">“Tem coisas que a gente aprende com o pai sem ele precisar falar nada.” No Palácio, os pequenos são recebidos com carinho, paciência e atenção aos detalhes.</p>
+  </section>
+
+  <!-- 9 · A CORTE (equipe) -->
+  <section class="corte" id="equipe">
+    <div class="corte-cab">
+      <p class="rotulo rotulo-claro">A corte</p>
+      <h2>Quem faz o<br><em>Palácio</em> acontecer</h2>
+      <p>Barbeiros e barbeiras de uniforme azul e suspensório, treinamento constante e um padrão que se respeita.</p>
+      <a class="link-seta" target="_blank" rel="noopener" id="zap-vagas" href="#">Estamos contratando barbeiros →</a>
+    </div>
+    <div class="mosaico">
+      <figure class="m1"><img src="fotos/site/028.webp" alt="Dois barbeiros da equipe lado a lado"></figure>
+      <figure class="m2"><img src="fotos/site/002.webp" alt="Dany Show, barbeiro, com as mãos tatuadas"><figcaption>Dany Show · “o show começa na cadeira”</figcaption></figure>
+      <figure class="m3"><img src="fotos/site/024.webp" alt="Barbeira de lenço sorrindo"></figure>
+      <figure class="m4"><img src="fotos/site/054.webp" alt="Barbeiro sorrindo com a máquina na mão"></figure>
+      <figure class="m5"><img src="fotos/site/079.webp" alt="Barbeiro com cliente satisfeito"></figure>
+      <figure class="m6"><img src="fotos/site/006.webp" alt="Barbeira de bandana amarela com cliente jovem"></figure>
+      <figure class="m7"><img src="fotos/site/001.webp" alt="Recepcionista do Palácio do Corte sorrindo"><figcaption>Recepção</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 10 · CASAS -->
+  <section class="casas" id="casas">
+    <p class="rotulo">Unidades</p>
+    <h2 class="casas-titulo">Duas casas.<br><em>Um padrão.</em></h2>
+    <div class="casas-grade" id="casas-grade"></div>
+    <div class="horarios">
+      <h3>Horário de funcionamento</h3>
+      <dl>
+        <div><dt>Segunda a quarta</dt><dd>08h às 19h30</dd></div>
+        <div><dt>Quinta a sábado</dt><dd>09h às 20h</dd></div>
+        <div><dt>Domingo</dt><dd>07h às 12h30</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- 11 · AGENDAR -->
+  <section class="agendar" id="agendar">
+    <div class="agendar-cab">
+      <p class="rotulo">Agendamento</p>
+      <h2>O que deseja<br><em>para hoje?</em></h2>
+      <p>Escolha a casa, o barbeiro e o horário. Leva menos de um minuto e não precisa baixar nada.</p>
+      <button class="btn btn-linha-escura" id="instalar">Instalar o Palácio no celular</button>
+    </div>
     <div class="caixa">
-      <div class="passos" id="passos"></div>
+      <ol class="passos" id="passos"></ol>
       <div class="etapa" id="etapa"></div>
       <div class="navega" id="navega"></div>
     </div>
+  </section>
 
-    <div class="app-banner">
-      <svg width="44" height="44" viewBox="0 0 64 64" aria-hidden="true"><use href="#coroa"/></svg>
-      <p><b>Tenha o Palácio na tela do celular.</b> Instale o site como aplicativo, com o ícone da coroa, e agende em dois toques.</p>
-      <button class="btn btn-linha" id="instalar">Instalar o app</button>
-    </div>
-  </div>
-</section>
+</main>
 
 <footer class="rodape">
-  <div class="wrap rodape-in">
-    <span>© Palácio do Corte · <a href="https://www.instagram.com/palaciodocortee/" target="_blank" rel="noopener">@palaciodocortee</a></span>
-    <span><a href="painel.html">Área da equipe</a> · Feito pela Zync</span>
+  <p class="rodape-gigante" aria-hidden="true">O que deseja para hoje?</p>
+  <div class="rodape-in">
+    <img src="fotos/brasao.png" alt="Palácio do Corte Barbershop" class="rodape-brasao">
+    <div class="rodape-col">
+      <b>Cidade Baixa</b><span>Rua Duarte da Costa, 185</span>
+      <b>Federação</b><span>Av. Cardeal da Silva</span>
+    </div>
+    <div class="rodape-col">
+      <a href="https://www.instagram.com/palaciodocortee/" target="_blank" rel="noopener">@palaciodocortee</a>
+      <a id="zap-rodape" href="#" target="_blank" rel="noopener">(71) 9 9188-4864</a>
+      <a href="painel.html">Área da equipe</a>
+    </div>
   </div>
+  <p class="rodape-nota">Protótipo de demonstração feito pela Zync. Fotos do Instagram do Palácio. Nomes de barbeiros e preços, além do corte, são de exemplo.</p>
 </footer>
 
 <a class="zap-flutua" id="zap" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4z"/></svg>
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4z"/></svg>
 </a>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="assets/dados.js"></script>
 <script src="assets/site.js"></script>
+<script src="assets/movimento.js"></script>
 </body>
 </html>

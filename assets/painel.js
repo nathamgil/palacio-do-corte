@@ -55,9 +55,9 @@
     $('#app').innerHTML = `
     <div class="entrada"><div class="entrada-caixa">
       <div class="entrada-topo">
-        <img src="assets/icone.svg" width="64" height="64" alt="">
-        <h1>PALÁCIO DO CORTE</h1>
-        <p>Painel da equipe. Escolha como entrar.</p>
+        <img src="fotos/brasao.png" width="240" alt="Palácio do Corte Barbershop" style="width:min(240px,60vw);height:auto;margin:0 auto">
+        <h1>Painel da equipe</h1>
+        <p>Escolha como entrar.</p>
       </div>
       <div class="perfis">
         <div class="perfil">
@@ -106,7 +106,7 @@
     $('#app').innerHTML = `
       <header class="barra">
         <div class="barra-in">
-          <span class="marca"><img src="assets/icone.svg" width="32" height="32" alt="">PALÁCIO</span>
+          <span class="marca"><img src="fotos/escudo.png" width="44" alt=""><i style="font-style:italic;letter-spacing:0">Palácio do Corte</i></span>
           <span class="quem"><span class="av">${inicial(perfilNome())}</span>${E(quem)}</span>
           <div class="relogio" title="Na demonstração dá pra fixar o relógio e mostrar a cena do atraso a qualquer hora">
             <span>Relógio da demo</span>

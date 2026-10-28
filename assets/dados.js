@@ -19,18 +19,20 @@
       {
         id: 'cb', nome: 'Cidade Baixa', endereco: 'Rua Duarte da Costa, 185',
         cidade: 'Cidade Baixa · Salvador — BA', selo: 'A casa de origem',
+        perto: 'Pertinho de quem está no Uruguai, Bonfim, Ribeira e bairros da região.',
         mapa: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('Rua Duarte da Costa, 185, Salvador - BA')
       },
       {
-        id: 'cs', nome: 'Cardeal da Silva', endereco: 'Av. Cardeal da Silva',
-        cidade: 'Salvador — BA', selo: 'Unidade nova',
-        mapa: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('Avenida Cardeal da Silva, Salvador - BA')
+        id: 'cs', nome: 'Federação', endereco: 'Av. Cardeal da Silva',
+        cidade: 'Federação · Salvador — BA', selo: 'A casa nova',
+        perto: 'Ideal para quem está no Horto Florestal, Rio Vermelho, Federação e regiões próximas.',
+        mapa: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('Avenida Cardeal da Silva, Federação, Salvador - BA')
       }
     ],
 
     barbeiros: [
       { id: 'christian', nome: 'Christian', unidade: 'cb', espec: 'Degradê e navalhado' },
-      { id: 'diego',     nome: 'Diego',     unidade: 'cb', espec: 'Barba e toalha quente' },
+      { id: 'dany',      nome: 'Dany Show', unidade: 'cb', espec: 'O show começa na cadeira' },
       { id: 'rafael',    nome: 'Rafael',    unidade: 'cb', espec: 'Corte social' },
       { id: 'lucas',     nome: 'Lucas',     unidade: 'cb', espec: 'Freestyle e desenho' },
       { id: 'bruno',     nome: 'Bruno',     unidade: 'cs', espec: 'Degradê e risco' },
@@ -40,10 +42,11 @@
     ],
 
     servicos: [
-      { id: 'corte',       nome: 'Corte',            dur: 30, preco: 40 },
-      { id: 'degrade',     nome: 'Corte degradê',    dur: 45, preco: 45 },
+      { id: 'corte',       nome: 'Corte',            dur: 30, preco: 30 },
+      { id: 'degrade',     nome: 'Corte degradê',    dur: 45, preco: 30 },
       { id: 'barba',       nome: 'Barba',            dur: 30, preco: 30 },
-      { id: 'combo',       nome: 'Corte + barba',    dur: 60, preco: 65 },
+      { id: 'combo',       nome: 'Corte + barba',    dur: 60, preco: 55 },
+      { id: 'barboterapia', nome: 'Barboterapia',    dur: 45, preco: 50 },
       { id: 'sobrancelha', nome: 'Sobrancelha',      dur: 15, preco: 15 },
       { id: 'pigmentacao', nome: 'Pigmentação',      dur: 30, preco: 35 },
       { id: 'infantil',    nome: 'Corte infantil',   dur: 30, preco: 35 },
@@ -65,8 +68,8 @@
       { id: 'p-realeza', nome: 'Plano Realeza',       preco: 240, desc: '4 cortes + 4 barbas + 4 sobrancelhas e 10% nos produtos', cobre: ['corte', 'degrade', 'barba', 'combo', 'sobrancelha'], destaque: true }
     ],
 
-    // Expediente de exemplo: seg a sex 9h–20h, sáb 8h–18h, domingo fechado.
-    expediente: { 0: null, 1: [540, 1200], 2: [540, 1200], 3: [540, 1200], 4: [540, 1200], 5: [540, 1200], 6: [480, 1080] },
+    // Expediente do destaque "Horários" do Instagram: seg–qua 8h–19h30, qui–sáb 9h–20h, dom 7h–12h30.
+    expediente: { 0: [420, 750], 1: [480, 1170], 2: [480, 1170], 3: [480, 1170], 4: [540, 1200], 5: [540, 1200], 6: [540, 1200] },
 
     regrasPadrao: { tolerancia: 10, modoTroca: 'sugerir', janelaDias: 15, comissao: 50, gradeSite: 30, antecedencia: 30 }
   });
@@ -97,7 +100,7 @@
   PC.precoDe = (ids) => ids.reduce((t, i) => t + (PC.servico(i) || { preco: 0 }).preco, 0);
 
   /* ---------------- banco (localStorage) ---------------- */
-  const CHAVE = 'palacio_demo_v1';
+  const CHAVE = 'palacio_demo_v2';
   let db = null;
   function ler() { try { return JSON.parse(localStorage.getItem(CHAVE) || 'null'); } catch (e) { return null; } }
   PC.salvar = () => { try { localStorage.setItem(CHAVE, JSON.stringify(db)); } catch (e) { /* modo privado: segue só na memória */ } };
@@ -264,13 +267,13 @@
     add('christian', hoje, 15 * 60 + 30, ['degrade'], cli('João Gabriel'));
     add('rafael', hoje, 13 * 60 + 30, ['combo'], cli('Felipe Andrade'), { status: 'atendimento' });
     add('lucas', hoje, 15 * 60, ['corte'], cli('Gustavo Lima'));
-    add('diego', hoje, 15 * 60, ['barba'], cli('Renan Costa'));
+    add('dany', hoje, 15 * 60, ['barba'], cli('Renan Costa'));
     // outro atrasado, na Cardeal, ainda sem chegar
     add('thiago', hoje, 14 * 60, ['corte', 'sobrancelha'], cli('Caio Souza'), { origem: 'Site' });
     add('thiago', hoje, 14 * 60 + 45, ['luzes'], cli('Igor Santana'));
     add('bruno', hoje, 14 * 60 + 15, ['degrade'], cli('Davi Oliveira'), { status: 'chegou' });
 
-    const reservados = { diego: [[14 * 60, 15 * 60]], lucas: [[14 * 60, 15 * 60]], matheus: [[14 * 60, 15 * 60]] };
+    const reservados = { dany: [[14 * 60, 15 * 60]], lucas: [[14 * 60, 15 * 60]], matheus: [[14 * 60, 15 * 60]] };
     const servPeso = ['corte', 'corte', 'degrade', 'degrade', 'combo', 'combo', 'barba', 'sobrancelha', 'pigmentacao', 'infantil'];
     const pool = clientes.filter((c) => !['Marcos Vinícius', 'Caio Souza'].includes(c.nome));
 
