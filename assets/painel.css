@@ -192,3 +192,39 @@ td.num,th.num{text-align:right}
 
 .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--azul);color:#fff;padding:.8rem 1.2rem;border-radius:12px;z-index:90;font-weight:700;box-shadow:0 12px 30px -10px rgba(0,0,0,.5);max-width:calc(100% - 32px)}
 .vazio{padding:1.4rem;text-align:center;color:var(--tinta3);border:1px dashed var(--linha);border-radius:12px;background:var(--card)}
+
+/* ---------- gestão parte 2 ---------- */
+.tag.amarelo{background:#FDF3D8;color:#8A5A00}
+.acoes-linha{display:flex;gap:.35rem;flex-wrap:wrap;justify-content:flex-end}
+.lista-simples{list-style:none;display:grid;gap:.45rem}
+.lista-simples li{display:flex;justify-content:space-between;gap:.6rem;align-items:center;padding:.5rem .6rem;border:1px solid var(--linha2);border-radius:10px}
+.lista-simples small{display:block;color:var(--tinta3);font-size:.8rem}
+table.escala td,table.escala th{text-align:center;padding:.35rem}
+table.escala td:first-child,table.escala th:first-child{text-align:left}
+table.escala tr.sep td{text-align:left;font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta3);background:var(--linha2)}
+.cel{width:100%;min-width:84px;padding:.45rem .3rem;border-radius:8px;background:#E6F2EA;color:#14532D;font-weight:700;font-size:.8rem;border:1px solid transparent}
+.cel:hover{border-color:var(--tinta)}
+.cel.f-folga{background:#ECE7DB;color:var(--tinta2)}
+.cel.f-ferias{background:#E3E9F8;color:#1F45B5}
+.cel.f-atestado{background:#FBE3E1;color:#B91C1C}
+.funil{display:grid;grid-template-columns:repeat(4,minmax(180px,1fr));gap:.8rem;overflow-x:auto}
+.funil-col{background:var(--linha2);border-radius:12px;padding:.7rem;display:grid;gap:.5rem;align-content:start}
+.funil-col h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--tinta2)}
+.cand{background:#fff;border-radius:10px;padding:.6rem;display:grid;gap:.2rem}
+.cand small{color:var(--tinta3);font-size:.8rem}
+.cand .acoes-linha{justify-content:flex-start;margin-top:.3rem}
+.barras{display:flex;align-items:flex-end;gap:3px;height:200px;padding-top:.5rem}
+.barras .b{flex:1;height:100%;display:flex;flex-direction:column-reverse;position:relative;padding-bottom:18px}
+.barras .b i{display:block;width:100%;border-radius:3px 3px 0 0}
+.barras .b small{position:absolute;bottom:0;left:0;right:0;text-align:center;font-size:.65rem;color:var(--tinta3)}
+.barras.pico{height:150px}
+.legenda-g{float:right;font-size:.8rem;font-weight:600;color:var(--tinta2);display:flex;gap:.4rem;align-items:center}
+.legenda-g i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.tres-col{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
+@media(max-width:900px){.tres-col{grid-template-columns:1fr}}
+.nota-fiscal .nf-tipo{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ouro)}
+.nota-fiscal table{width:100%}
+.nf-chave{font-family:monospace;font-size:.78rem;background:var(--linha2);padding:.5rem;border-radius:8px;word-break:break-all}
+.alerta-txt{background:#FDF3D8;color:#8A5A00;padding:.6rem .8rem;border-radius:10px;font-weight:600;margin-bottom:.8rem}
+button.tag{border:none;cursor:pointer}
+.abas{scrollbar-width:none}.abas::-webkit-scrollbar{display:none}

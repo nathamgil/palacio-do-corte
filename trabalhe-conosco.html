@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trabalhe conosco · Palácio do Corte</title>
+<meta name="description" content="Barbeiro em Salvador? O Palácio do Corte está contratando. Mínimo garantido, comissão de 35% a 45% e formação no padrão Palácio.">
+<meta name="theme-color" content="#0A1430">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icone-192.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/paginas.css">
+</head>
+<body>
+<header class="nav cheia">
+  <a href="index.html" class="nav-marca"><img src="fotos/escudo.png" alt="" width="46" height="29"><span>Palácio do Corte</span></a>
+  <nav class="nav-links" aria-label="Páginas">
+    <a href="index.html#historia">História</a>
+    <a href="index.html#casas">Unidades</a>
+    <a href="clube.html">Clube Realeza</a>
+    <a href="trabalhe-conosco.html" aria-current="page">Trabalhe conosco</a>
+  </nav>
+  <a href="agendar.html" class="nav-cta">Agendar</a>
+</header>
+
+<main>
+  <section class="pg-capa">
+    <img src="fotos/site/028.webp" alt="Dois barbeiros do Palácio do Corte de uniforme azul">
+    <div class="pg-capa-txt">
+      <p class="rotulo rotulo-claro">Estamos contratando</p>
+      <h1>Faça parte<br><em>da corte.</em></h1>
+      <p class="citacao">“Uma equipe que valoriza padrão, experiência e evolução profissional.”</p>
+      <p>Duas casas em Salvador, agenda cheia e um jeito próprio de atender. Se você é barbeiro, ou quer virar um, o caminho começa aqui.</p>
+      <a href="#inscricao" class="btn btn-creme">Quero me inscrever <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="pg-sec claro">
+    <p class="rotulo">O que a casa oferece</p>
+    <h2>Cadeira cheia,<br><em>chão firme.</em></h2>
+    <div class="numeros">
+      <div><b>R$ 1.200</b><span>de mínimo garantido por mês, mesmo no começo</span></div>
+      <div><b>35–45%</b><span>de comissão, crescendo com o seu resultado</span></div>
+      <div><b>2 casas</b><span>Cidade Baixa e Federação, para trabalhar perto de casa</span></div>
+      <div><b>0 h</b><span>gastas atrás de cliente: a agenda chega pelo app e pela recepção</span></div>
+    </div>
+  </section>
+
+  <section class="pg-sec">
+    <p class="rotulo rotulo-claro">Formação Palácio</p>
+    <h2>Do teste à <em>cadeira própria.</em></h2>
+    <div class="etapas">
+      <article class="etapa-c"><img src="fotos/site/054.webp" alt="Barbeiro sorrindo com a máquina na mão" loading="lazy"><div><h3>Inscrição</h3><p>Você se apresenta aqui, com seu Instagram de cortes se tiver. A gente chama no WhatsApp.</p></div></article>
+      <article class="etapa-c"><img src="fotos/site/079.webp" alt="Barbeiro com cliente satisfeito" loading="lazy"><div><h3>Teste na cadeira</h3><p>Um atendimento de verdade, acompanhado. Olhamos técnica, cuidado e como você trata o cliente.</p></div></article>
+      <article class="etapa-c"><img src="fotos/site/056.webp" alt="Toalha quente com vapor no ritual do Palácio" loading="lazy"><div><h3>Imersão no padrão</h3><p>Toalha quente com vapor, barboterapia, pequenos príncipes e o “O que deseja para hoje?”. O jeito Palácio, do primeiro oi ao acabamento.</p></div></article>
+      <article class="etapa-c"><img src="fotos/site/024.webp" alt="Barbeira do Palácio sorrindo" loading="lazy"><div><h3>Cadeira própria</h3><p>Agenda aberta no app, comissão e extrato no seu perfil. E treinamento constante para continuar subindo.</p></div></article>
+    </div>
+    <p class="aviso-ex">Etapas montadas como exemplo, para ajustar com o processo de formação que o Palácio já usa.</p>
+  </section>
+
+  <section class="pg-sec claro" id="inscricao">
+    <p class="rotulo">Inscrição</p>
+    <h2>Conta pra gente <em>quem é você.</em></h2>
+    <div id="form-area">
+      <form class="form-grade" id="form-vaga" novalidate>
+        <label>Nome completo<input name="nome" autocomplete="name" required></label>
+        <label>WhatsApp<input name="tel" inputmode="tel" autocomplete="tel" placeholder="(71) 9 0000-0000" required></label>
+        <div class="inteiro"><span style="font-weight:700;font-size:.95rem">Experiência</span>
+          <div class="chips" data-campo="exp" style="margin-top:.4rem"><button type="button">Começando agora</button><button type="button">Até 1 ano</button><button type="button">1 a 3 anos</button><button type="button">Mais de 3 anos</button></div></div>
+        <label>No que você é bom?<input name="especial" placeholder="ex.: degradê, navalhado, barba, infantil"></label>
+        <label>Instagram de cortes (opcional)<input name="insta" placeholder="@seuperfil"></label>
+        <label class="inteiro">Prefere qual casa?<select name="unidade"><option value="cb">Cidade Baixa</option><option value="cs">Federação</option></select></label>
+        <div class="inteiro"><button class="btn btn-royal" type="submit">Enviar inscrição <span aria-hidden="true">→</span></button></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape-simples">
+  <img src="fotos/brasao.png" alt="Palácio do Corte">
+  <span>Rua Duarte da Costa, 185 · Av. Cardeal da Silva · Salvador</span>
+  <a href="index.html">← Voltar ao site</a>
+  <span>Protótipo Zync · dados de exemplo</span>
+</footer>
+
+<script src="assets/dados.js"></script>
+<script src="assets/paginas.js"></script>
+</body>
+</html>

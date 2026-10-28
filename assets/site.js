@@ -29,7 +29,6 @@
   // ---------- links de WhatsApp ----------
   $('#zap').href = PC.zap(PC.whatsapp, 'Olá! Vim pelo site do Palácio do Corte.');
   $('#zap-rodape').href = PC.zap(PC.whatsapp, 'Olá! Vim pelo site do Palácio do Corte.');
-  $('#zap-vagas').href = PC.zap(PC.whatsapp, 'Olá! Sou barbeiro e quero saber da vaga no Palácio do Corte.');
 
   // ---------- unidades ----------
   $('#casas-grade').innerHTML = PC.unidades.map((u) => `
@@ -39,7 +38,7 @@
       <h3>${E(u.nome)}</h3>
       <p>${E(u.endereco)}. ${E(u.perto)}</p>
       <div class="acoes">
-        <a href="#agendar" class="cheio" data-unid="${u.id}">Agendar aqui</a>
+        <a href="agendar.html?u=${u.id}" class="cheio">Agendar aqui</a>
         <a href="${u.mapa}" target="_blank" rel="noopener">Como chegar</a>
       </div>
     </article>`).join('');

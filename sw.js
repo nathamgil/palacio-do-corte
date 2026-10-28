@@ -1,5 +1,5 @@
 /* Service worker mínimo: deixa o site instalável e abre offline a última versão vista. */
-const CACHE = 'palacio-v3';
+const CACHE = 'palacio-v4';
 self.addEventListener('install', (e) => self.skipWaiting());
 self.addEventListener('activate', (e) => e.waitUntil(self.clients.claim()));
 self.addEventListener('fetch', (e) => {

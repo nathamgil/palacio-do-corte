@@ -785,6 +785,8 @@ Matheus Oliveira;71991230099;;Corte`;
   }
 
   const TELAS = { agenda: telaAgenda, minha: telaMinha, vender: telaVender, clientes: telaClientes, caixa: telaCaixa, geral: telaGeral, importar: telaImportar, regras: telaRegras };
+  // telas extras da gestão (estoque, notas e Pix, escala, acerto, resultados) ficam em gestao.js
+  if (window.GESTAO) window.GESTAO({ $, $$, E, toast, modal, fecharModal, salvarRender, render, sess: () => sess, chipsUnidade, ligarChips, nomeB, ABAS, TELAS });
 
   // horário marcado no site (outra aba) aparece aqui na hora
   window.addEventListener('storage', () => { if (!$('#veu') && !(document.activeElement && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))) render(); });

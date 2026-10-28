@@ -86,7 +86,7 @@
     // Expediente do destaque "Horários" do Instagram: seg–qua 8h–19h30, qui–sáb 9h–20h, dom 7h–12h30.
     expediente: { 0: [420, 750], 1: [480, 1170], 2: [480, 1170], 3: [480, 1170], 4: [540, 1200], 5: [540, 1200], 6: [540, 1200] },
 
-    regrasPadrao: { tolerancia: 10, modoTroca: 'sugerir', janelaDias: 15, comissao: 50, gradeSite: 30, antecedencia: 30, cancelarAte: 120, pix: 'opcional', descontoEquipe: 'custo', emissorNF: 'auto' }
+    regrasPadrao: { tolerancia: 10, modoTroca: 'sugerir', janelaDias: 15, comissao: 40, gradeSite: 30, antecedencia: 30, cancelarAte: 120, pix: 'opcional', descontoEquipe: 'custo', emissorNF: 'auto' }
   });
 
   /* ---------------- utilidades ---------------- */
@@ -115,7 +115,7 @@
   PC.precoDe = (ids) => ids.reduce((t, i) => t + (PC.servico(i) || { preco: 0 }).preco, 0);
 
   /* ---------------- banco (localStorage) ---------------- */
-  const CHAVE = 'palacio_demo_v3';
+  const CHAVE = 'palacio_demo_v4';
   let db = null;
   function ler() { try { return JSON.parse(localStorage.getItem(CHAVE) || 'null'); } catch (e) { return null; } }
   PC.salvar = () => { try { localStorage.setItem(CHAVE, JSON.stringify(db)); } catch (e) { /* modo privado: segue só na memória */ } };
@@ -406,7 +406,7 @@
     const comNF = novo.vendas.filter((v) => v.nf).sort((a, b) => a.hora - b.hora);
     comNF.slice(0, Math.max(0, comNF.length - 4)).forEach((v) => PC.emitirNF(v));
     // parte dos horários marcados pelo site já veio paga no Pix
-    novo.agendamentos.filter((a) => a.origem === 'Site' && a.status === 'agendado').forEach((a, i) => { if (i % 3 === 0) a.pix = { valor: a.total, pago: true }; });
+    novo.agendamentos.filter((a) => a.origem === 'Site' && a.status === 'agendado').forEach((a, i) => { if (i % 5 === 0) a.pix = { valor: a.total, pago: true }; });
 
     // uma troca por atraso que já aconteceu de manhã (pro gestor ver o histórico)
     novo.trocas.push({ id: PC.id(), data: hoje, hora: 10 * 60 + 18, unidade: 'cs', cliente: 'Breno Silva', de: 'bruno', para: 'vitor', atraso: 18, motivo: 'Troca por atraso' });
