@@ -2,7 +2,7 @@
   "name": "Palácio do Corte",
   "short_name": "Palácio",
   "description": "Agende seu horário no Palácio do Corte.",
-  "start_url": "./index.html#agendar",
+  "start_url": "./agendar.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#0A1430",

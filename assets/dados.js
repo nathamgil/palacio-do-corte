@@ -53,13 +53,28 @@
       { id: 'luzes',       nome: 'Luzes / nevou',    dur: 90, preco: 120 }
     ],
 
+    // Venda ao público (preço de venda, custo e estoque mínimo por unidade)
     produtos: [
-      { id: 'pomada',  nome: 'Pomada modeladora',  preco: 35 },
-      { id: 'cera',    nome: 'Cera efeito seco',   preco: 35 },
-      { id: 'oleo',    nome: 'Óleo para barba',    preco: 40 },
-      { id: 'balm',    nome: 'Balm para barba',    preco: 38 },
-      { id: 'shampoo', nome: 'Shampoo 3 em 1',     preco: 45 },
-      { id: 'pente',   nome: 'Pente de madeira',   preco: 20 }
+      { id: 'pomada',  nome: 'Pomada modeladora',  preco: 35, custo: 16, min: 4 },
+      { id: 'cera',    nome: 'Cera efeito seco',   preco: 35, custo: 15, min: 4 },
+      { id: 'oleo',    nome: 'Óleo para barba',    preco: 40, custo: 17, min: 3 },
+      { id: 'balm',    nome: 'Balm para barba',    preco: 38, custo: 16, min: 3 },
+      { id: 'shampoo', nome: 'Shampoo 3 em 1',     preco: 45, custo: 19, min: 3 },
+      { id: 'pente',   nome: 'Pente de madeira',   preco: 20, custo: 6,  min: 5 },
+      { id: 'agua',    nome: 'Água mineral',       preco: 4,  custo: 1.5, min: 24 },
+      { id: 'refri',   nome: 'Refrigerante lata',  preco: 7,  custo: 3,  min: 24 }
+    ],
+
+    // Insumos da casa: o que o barbeiro gasta na cadeira (não vai pra venda)
+    insumos: [
+      { id: 'lamina',   nome: 'Lâmina descartável (cx 100)', un: 'cx',  custo: 38, min: 3 },
+      { id: 'pescoco',  nome: 'Papel pescoceira (rolo)',      un: 'rolo', custo: 12, min: 6 },
+      { id: 'toalha',   nome: 'Toalha de rosto',              un: 'un',  custo: 9,  min: 30 },
+      { id: 'alcool',   nome: 'Álcool 70% (1 L)',             un: 'L',   custo: 11, min: 4 },
+      { id: 'gelbarba', nome: 'Gel de barbear (1 kg)',        un: 'pote', custo: 32, min: 2 },
+      { id: 'talco',    nome: 'Talco pós-corte',              un: 'un',  custo: 14, min: 3 },
+      { id: 'lavat',    nome: 'Shampoo de lavatório (5 L)',   un: 'galão', custo: 58, min: 1 },
+      { id: 'po',       nome: 'Pó descolorante (luzes)',      un: 'pote', custo: 46, min: 2 }
     ],
 
     planos: [
@@ -71,7 +86,7 @@
     // Expediente do destaque "Horários" do Instagram: seg–qua 8h–19h30, qui–sáb 9h–20h, dom 7h–12h30.
     expediente: { 0: [420, 750], 1: [480, 1170], 2: [480, 1170], 3: [480, 1170], 4: [540, 1200], 5: [540, 1200], 6: [540, 1200] },
 
-    regrasPadrao: { tolerancia: 10, modoTroca: 'sugerir', janelaDias: 15, comissao: 50, gradeSite: 30, antecedencia: 30 }
+    regrasPadrao: { tolerancia: 10, modoTroca: 'sugerir', janelaDias: 15, comissao: 50, gradeSite: 30, antecedencia: 30, cancelarAte: 120, pix: 'opcional', descontoEquipe: 'custo', emissorNF: 'auto' }
   });
 
   /* ---------------- utilidades ---------------- */
@@ -92,7 +107,7 @@
   PC.unidade = (id) => PC.unidades.find((u) => u.id === id);
   PC.barbeiro = (id) => PC.barbeiros.find((b) => b.id === id);
   PC.servico = (id) => PC.servicos.find((s) => s.id === id);
-  PC.produto = (id) => PC.produtos.find((p) => p.id === id);
+  PC.produto = (id) => PC.produtos.find((p) => p.id === id) || PC.insumos.find((p) => p.id === id);
   PC.plano = (id) => PC.planos.find((p) => p.id === id);
   PC.barbeirosDa = (u) => PC.barbeiros.filter((b) => !u || u === 'todas' || b.unidade === u);
   PC.nomeServicos = (ids) => ids.map((i) => (PC.servico(i) || {}).nome).join(' + ');
@@ -100,7 +115,7 @@
   PC.precoDe = (ids) => ids.reduce((t, i) => t + (PC.servico(i) || { preco: 0 }).preco, 0);
 
   /* ---------------- banco (localStorage) ---------------- */
-  const CHAVE = 'palacio_demo_v2';
+  const CHAVE = 'palacio_demo_v3';
   let db = null;
   function ler() { try { return JSON.parse(localStorage.getItem(CHAVE) || 'null'); } catch (e) { return null; } }
   PC.salvar = () => { try { localStorage.setItem(CHAVE, JSON.stringify(db)); } catch (e) { /* modo privado: segue só na memória */ } };
@@ -129,6 +144,7 @@
   PC.livre = (barbeiroId, data, ini, dur, ignorarId) => {
     const exp = PC.expedienteDe(data);
     if (!exp || ini < exp[0] || ini + dur > exp[1]) return false;
+    if (!PC.trabalha(barbeiroId, data)) return false;
     return !PC.db().agendamentos.some((a) => a.barbeiro === barbeiroId && a.data === data && a.id !== ignorarId && PC.ativo(a) && ini < a.ini + a.dur && a.ini < ini + dur)
       && !PC.db().bloqueios.some((b) => b.barbeiro === barbeiroId && b.data === data && ini < b.fim && b.ini < ini + dur);
   };
@@ -141,6 +157,29 @@
       if (m >= minimo && PC.livre(barbeiroId, data, m, dur)) lista.push(m);
     }
     return lista;
+  };
+
+  /* ---------------- escala: folga fixa da semana + ausências ---------------- */
+  PC.ausencia = (barbeiroId, data) => (PC.db().ausencias || []).find((x) => x.barbeiro === barbeiroId && data >= x.de && data <= x.ate);
+  PC.trabalha = (barbeiroId, data) => {
+    if (PC.ausencia(barbeiroId, data)) return false;
+    const f = (PC.db().escala || {})[barbeiroId];
+    return !(f && f.folga === PC.diaSemana(data));
+  };
+  PC.situacao = (barbeiroId, data) => {
+    const a = PC.ausencia(barbeiroId, data); if (a) return a.tipo;
+    return PC.trabalha(barbeiroId, data) ? 'trabalha' : 'folga';
+  };
+  PC.barbeirosNoDia = (u, data) => PC.barbeirosDa(u).filter((b) => PC.trabalha(b.id, data));
+
+  /* ---------------- área do cliente (app de agendamento) ---------------- */
+  PC.agsDoCliente = (tel) => { const t = String(tel || '').replace(/\D/g, ''); return t ? PC.db().agendamentos.filter((a) => a.cliente.tel === t) : []; };
+  PC.minutosAte = (a) => (new Date(a.data + 'T00:00:00') - new Date(PC.hoje() + 'T00:00:00')) / 6e4 + a.ini - PC.agoraReal();
+  PC.podeCancelar = (a) => a.status === 'agendado' && PC.minutosAte(a) >= PC.regras().cancelarAte;
+  PC.cancelar = (a, motivo, quem) => {
+    a.status = 'cancelado'; a.motivoCancel = motivo || '';
+    if (a.pix && a.pix.pago) a.pix.estornado = true;
+    PC.registrar(a, `Desmarcado ${quem || 'pelo cliente no app'}${motivo ? ' · ' + motivo : ''}${a.pix && a.pix.estornado ? ' · Pix devolvido' : ''}`);
   };
 
   PC.qtdNoDia = (barbeiroId, data) => PC.doDia(data, (a) => a.barbeiro === barbeiroId && PC.ativo(a)).length;
@@ -204,7 +243,7 @@
   };
 
   PC.lancarVenda = (v) => {
-    const venda = Object.assign({ id: PC.id(), data: PC.hoje(), hora: PC.agora() }, v);
+    const venda = Object.assign({ id: PC.id(), data: PC.hoje(), hora: PC.agora(), nf: v.total > 0 ? { status: 'pendente' } : null }, v);
     PC.db().vendas.push(venda);
     (v.itens || []).forEach((it) => {
       if (it.tipo === 'produto') { const e = PC.db().estoque[v.unidade]; e[it.id] = Math.max(0, (e[it.id] || 0) - it.qtd); }
@@ -212,7 +251,32 @@
         PC.db().assinaturas.push({ id: PC.id(), cliente: v.cliente, plano: it.id, inicio: PC.hoje(), vence: PC.somaDias(PC.hoje(), 30), unidade: v.unidade });
       }
     });
+    if (PC.regras().emissorNF === 'auto' && venda.nf) PC.emitirNF(venda);
     return venda;
+  };
+
+  /* ---------------- nota fiscal (simulada; na versão real vai pela API do emissor) ----------------
+     Serviço → NFS-e (Prefeitura de Salvador). Produto → NFC-e (SEFAZ-BA). */
+  PC.tipoNF = (v) => v.itens.some((i) => i.tipo === 'produto') ? (v.itens.some((i) => i.tipo !== 'produto') ? 'NFS-e + NFC-e' : 'NFC-e') : 'NFS-e';
+  PC.emitirNF = (v) => {
+    const db = PC.db(); db.nfSeq = (db.nfSeq || 1840) + 1;
+    v.nf = { status: 'emitida', numero: db.nfSeq, tipo: PC.tipoNF(v), quando: PC.agora(), chave: Array.from({ length: 11 }, () => Math.floor(Math.random() * 1e4).toString().padStart(4, '0')).join(' ') };
+    return v.nf;
+  };
+
+  /* ---------------- estoque e retiradas da equipe ---------------- */
+  PC.qtdEstoque = (u, id) => (PC.db().estoque[u] || {})[id] || 0;
+  PC.movEstoque = (u, id, delta, tipo, obs) => {
+    const db = PC.db(); db.estoque[u][id] = Math.max(0, PC.qtdEstoque(u, id) + delta);
+    (db.movimentos = db.movimentos || []).unshift({ id: PC.id(), data: PC.hoje(), hora: PC.agora(), unidade: u, item: id, delta, tipo, obs: obs || '' });
+  };
+  // Barbeiro leva produto: sai do estoque e vira desconto no acerto dele
+  PC.precoEquipe = (p) => { const m = PC.regras().descontoEquipe; return m === 'custo' ? p.custo : m === '30' ? +(p.preco * 0.7).toFixed(2) : p.preco; };
+  PC.retirada = (barbeiro, item, qtd) => {
+    const b = PC.barbeiro(barbeiro); const p = PC.produto(item);
+    const r = { id: PC.id(), data: PC.hoje(), barbeiro, item, qtd, valor: PC.precoEquipe(p) * qtd };
+    PC.db().retiradas.push(r); PC.movEstoque(b.unidade, item, -qtd, 'Retirada da equipe', b.nome);
+    return r;
   };
 
   /* ---------------- dados de exemplo ---------------- */
@@ -239,10 +303,33 @@
       versao: 1, dia: hoje, relogio: { modo: 'demo', min: 14 * 60 + 15 },
       regras: Object.assign({}, PC.regrasPadrao),
       clientes, agendamentos: [], vendas: [], assinaturas: [], trocas: [], bloqueios: [],
-      estoque: { cb: {}, cs: {} }
+      estoque: { cb: {}, cs: {} }, movimentos: [], retiradas: [], candidatos: [], historico: [], nfSeq: 1840,
+      // folga fixa de cada um (0 = domingo … 6 = sábado). Exemplo.
+      escala: { christian: { folga: 1 }, dany: { folga: 2 }, rafael: { folga: 3 }, lucas: { folga: 0 }, bruno: { folga: 1 }, matheus: { folga: 2 }, thiago: { folga: 3 }, vitor: { folga: 0 } },
+      ausencias: []
     };
-    PC.produtos.forEach((p) => { novo.estoque.cb[p.id] = 4 + Math.floor(rnd() * 12); novo.estoque.cs[p.id] = 3 + Math.floor(rnd() * 10); });
-    novo.estoque.cs.oleo = 2; novo.estoque.cb.balm = 1;
+    PC.produtos.forEach((p) => { novo.estoque.cb[p.id] = p.min + Math.floor(rnd() * 10); novo.estoque.cs[p.id] = p.min + Math.floor(rnd() * 8); });
+    PC.insumos.forEach((p) => { novo.estoque.cb[p.id] = p.min + Math.floor(rnd() * 6); novo.estoque.cs[p.id] = p.min + Math.floor(rnd() * 4); });
+    novo.estoque.cs.oleo = 2; novo.estoque.cb.balm = 1; novo.estoque.cs.lamina = 1; novo.estoque.cb.pescoco = 3;
+    // a cena do atraso precisa de Christian, Dany, Lucas, Rafael, Thiago, Bruno e Matheus trabalhando hoje
+    const dow = PC.diaSemana(hoje);
+    Object.keys(novo.escala).forEach((b) => { if (novo.escala[b].folga === dow && b !== 'vitor') novo.escala[b].folga = (dow + 3) % 7; });
+    novo.ausencias.push({ id: 'aus1', barbeiro: 'vitor', de: hoje, ate: PC.somaDias(hoje, 1), tipo: 'atestado', obs: 'Atestado de 2 dias' });
+    novo.ausencias.push({ id: 'aus2', barbeiro: 'rafael', de: PC.somaDias(hoje, 9), ate: PC.somaDias(hoje, 23), tipo: 'ferias', obs: 'Férias' });
+    [['christian', 'pomada', 1], ['dany', 'oleo', 1], ['bruno', 'cera', 2], ['thiago', 'shampoo', 1], ['dany', 'refri', 3]].forEach(([b, it, q], i) => {
+      const p = PC.produtos.find((x) => x.id === it); novo.retiradas.push({ id: 'r' + i, data: PC.somaDias(hoje, -i * 3 - 1), barbeiro: b, item: it, qtd: q, valor: p.custo * q });
+    });
+    // candidatos que vieram pela página "Trabalhe conosco"
+    novo.candidatos = [
+      { id: 'k1', nome: 'Jonathan Reis', tel: '71991230011', exp: '3 anos', especial: 'Degradê, navalhado', unidade: 'cs', insta: '@jonathan.cuts', etapa: 'teste', data: PC.somaDias(hoje, -4) },
+      { id: 'k2', nome: 'Ana Beatriz Lima', tel: '71988772233', exp: '1 ano', especial: 'Corte curto, infantil', unidade: 'cb', insta: '@biabarber', etapa: 'nova', data: PC.somaDias(hoje, -1) },
+      { id: 'k3', nome: 'Kauan Matos', tel: '71999881122', exp: 'Começando agora', especial: 'Quer aprender do zero', unidade: 'cb', insta: '', etapa: 'formacao', data: PC.somaDias(hoje, -20) }
+    ];
+    // faturamento dos últimos 28 dias (para os gráficos)
+    for (let d = 28; d >= 1; d--) {
+      const data = PC.somaDias(hoje, -d); const ds = PC.diaSemana(data); const peso = ds === 6 ? 1.45 : ds === 5 ? 1.25 : ds === 0 ? 0.55 : 1;
+      novo.historico.push({ data, cb: Math.round((1700 + rnd() * 700) * peso), cs: Math.round((900 + rnd() * 600 + (28 - d) * 22) * peso) });
+    }
 
     // assinantes de exemplo
     ['c2', 'c5', 'c9', 'c14', 'c21', 'c27'].forEach((cid, i) => novo.assinaturas.push({
@@ -305,15 +392,21 @@
       const plano = PC.assinaturaAtiva(a.cliente.id);
       novo.vendas.push({ id: PC.id(), data: hoje, hora: a.ini + a.dur, unidade: a.unidade, tipo: 'servico', ag: a.id, barbeiro: a.barbeiro, cliente: a.cliente.id,
         itens: [{ tipo: 'servico', id: a.servicos[0], nome: PC.nomeServicos(a.servicos), qtd: 1, preco: plano ? 0 : a.total }],
-        total: plano ? 0 : a.total, forma: plano ? 'Plano' : pega(formas), vendedor: 'Recepção' });
+        total: plano ? 0 : a.total, forma: plano ? 'Plano' : pega(formas), vendedor: 'Recepção', nf: plano ? null : { status: 'pendente' } });
     });
     [[10 * 60 + 20, 'cb', 'pomada', 1], [11 * 60 + 5, 'cs', 'oleo', 1], [12 * 60 + 40, 'cb', 'shampoo', 1], [13 * 60 + 10, 'cs', 'cera', 2]].forEach(([h, u, p, q]) => {
       novo.vendas.push({ id: PC.id(), data: hoje, hora: h, unidade: u, tipo: 'balcao', cliente: pega(clientes).id,
-        itens: [{ tipo: 'produto', id: p, nome: PC.produto(p).nome, qtd: q, preco: PC.produto(p).preco }], total: PC.produto(p).preco * q, forma: pega(formas), vendedor: 'Recepção' });
+        itens: [{ tipo: 'produto', id: p, nome: PC.produto(p).nome, qtd: q, preco: PC.produto(p).preco }], total: PC.produto(p).preco * q, forma: pega(formas), vendedor: 'Recepção', nf: { status: 'pendente' } });
     });
     novo.vendas.push({ id: PC.id(), data: hoje, hora: 11 * 60 + 30, unidade: 'cb', tipo: 'balcao', cliente: 'c33',
-      itens: [{ tipo: 'plano', id: 'p-combo', nome: 'Plano Corte + Barba', qtd: 1, preco: 180 }], total: 180, forma: 'Pix', vendedor: 'Recepção' });
+      itens: [{ tipo: 'plano', id: 'p-combo', nome: 'Plano Corte + Barba', qtd: 1, preco: 180 }], total: 180, forma: 'Pix', vendedor: 'Recepção', nf: { status: 'pendente' } });
     novo.assinaturas.push({ id: PC.id(), cliente: 'c33', plano: 'p-combo', inicio: hoje, vence: PC.somaDias(hoje, 30), unidade: 'cb' });
+
+    // quase todas as notas da manhã já saíram sozinhas; as últimas ficam na fila
+    const comNF = novo.vendas.filter((v) => v.nf).sort((a, b) => a.hora - b.hora);
+    comNF.slice(0, Math.max(0, comNF.length - 4)).forEach((v) => PC.emitirNF(v));
+    // parte dos horários marcados pelo site já veio paga no Pix
+    novo.agendamentos.filter((a) => a.origem === 'Site' && a.status === 'agendado').forEach((a, i) => { if (i % 3 === 0) a.pix = { valor: a.total, pago: true }; });
 
     // uma troca por atraso que já aconteceu de manhã (pro gestor ver o histórico)
     novo.trocas.push({ id: PC.id(), data: hoje, hora: 10 * 60 + 18, unidade: 'cs', cliente: 'Breno Silva', de: 'bruno', para: 'vitor', atraso: 18, motivo: 'Troca por atraso' });

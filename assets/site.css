@@ -283,3 +283,5 @@ h2 em{text-transform:none;font-weight:400;font-size:.92em}
   .m-foto{opacity:1;transform:none;position:relative;display:inline-block;margin:.5rem}
   .rf{transition:none}
 }
+
+@media(max-width:700px){.capa-rodape .btn{width:calc(100% - 72px)!important;justify-content:center}.navega{padding-right:64px}}

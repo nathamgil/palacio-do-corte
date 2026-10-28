@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Agendar · Palácio do Corte</title>
+<meta name="description" content="Marque, remarque ou desmarque seu horário no Palácio do Corte em menos de um minuto. Cidade Baixa e Federação.">
+<meta name="theme-color" content="#0A1430">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Palácio">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icone-192.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/icone-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+<aside class="lado" aria-hidden="true">
+  <img src="fotos/site/013.webp" alt="" class="lado-foto">
+  <div class="lado-txt">
+    <img src="fotos/brasao.png" alt="" class="lado-brasao">
+    <p class="lado-titulo">O app do <em>Palácio</em></p>
+    <p>Marque, remarque e desmarque pelo celular. Aponte a câmera e coloque na tela inicial.</p>
+    <div class="lado-qr" id="qr-lado"></div>
+    <a href="index.html" class="lado-volta">← Voltar ao site</a>
+  </div>
+</aside>
+
+<div class="app" id="app">
+  <header class="topo">
+    <button class="topo-volta" id="voltar" aria-label="Voltar" hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <a href="index.html" class="topo-marca" id="marca"><img src="fotos/escudo.png" alt="" width="40"><span>Palácio do Corte</span></a>
+    <p class="topo-titulo" id="titulo" hidden></p>
+    <span class="topo-passo" id="passo"></span>
+  </header>
+  <div class="progresso" id="progresso" hidden><i></i></div>
+  <main class="tela" id="tela" tabindex="-1"></main>
+  <div class="rodape-acao" id="acao" hidden></div>
+  <nav class="abas" id="abas" aria-label="Menu do app">
+    <a href="#inicio" data-r="inicio"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Início</a>
+    <a href="#agendar" data-r="agendar"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>Agendar</a>
+    <a href="#meus" data-r="meus"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Meus horários</a>
+    <a href="#clube" data-r="clube"><svg viewBox="0 0 24 24"><path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/></svg>Clube</a>
+  </nav>
+</div>
+
+<div id="folhas"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="assets/dados.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
